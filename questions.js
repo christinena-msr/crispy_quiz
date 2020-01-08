@@ -1,7 +1,7 @@
 var questionArr = [
     { // question 1
         title: "questionText",
-        choices: ["ans1, ans2, ans3, ans4"],
+        choices: ["ans1", "ans2", "ans3", "ans4"],
         answers: "ans3"
     },
     { // question 2
@@ -17,12 +17,12 @@ var questionArr = [
     {
         title: "questions4Text",
         choices: ["ans1", "ans2", "ans3", "ans4"],
-        answers: "ans1"
+        answers: "ans2"
     },
     {
         title: "questions5Text",
         choices: ["ans1", "ans2", "ans3", "ans4"],
-        answers: "ans1"
+        answers: "ans3"
     },
 ];
 
