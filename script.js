@@ -1,13 +1,35 @@
-var viewScoreBtn = document.querySelectorAll("button")[0];
-var startBtn = document.querySelectorAll("button")[1];
+// high scores button
+var viewScoreBtn = document.getElementById("score");
+// start quiz button
+var startBtn = document.getElementById("quiz");
+// pull questions from questions.js stored in local storage
 var quiz = JSON.parse(localStorage.getItem("questions"));
+console.log(quiz[0].title);
 var timeLeft = quiz.length * 15;
+// should be 75
 console.log(timeLeft);
+// div for countdown visual
 var countdown = document.createElement("div");
+// div for questions to populate
 var question = document.createElement("div");
-var multipleChoice;
-var answer;
+var multipleChoice = [];
+var answer = "";
 var i = 0;
+
+var qObject = quiz[0];
+console.log(qObject.title);
+question.textContent = qObject.title;
+for (let i=0; i<4; i++) {
+    //push to new array
+    multipleChoice.push(qObject.choices[i]);    
+}
+console.log(multipleChoice);
+var answer = qObject.answers;
+for (let i=0; i<multipleChoice.length; i++) {
+    var ansOption = document.createElement("button");
+    ansOption.textContent = multipleChoice[i];
+    ansOption.setAttribute("class", "answer-button")
+}
 
 function startQuiz() {
 // for (i=0; i < quiz.length; i++) {
@@ -46,8 +68,9 @@ startBtn.addEventListener("click", function (event) {
           countdown.textContent = "Time: 0";
           console.log("Time's up!");
           clearInterval(timeInterval);
-        } else {
-            startQuiz();
-        }
+        } //else {
+        //     startQuiz();
+        // }
     }, 1000);
+    startQuiz();
 });
