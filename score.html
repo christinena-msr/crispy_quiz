@@ -13,5 +13,9 @@
     </div>
     <a class="aBtn" id="back-btn" href="./index.html">Go Back</a>
     <button class="aBtn">Clear Highscores</button>
+    <script>
+        var highscore = JSON.parse(localStorage.getItem(score));
+        $(".score-board").text(highscore.name + " " + highscore.value);
+    </script>
 </body>
 </html>

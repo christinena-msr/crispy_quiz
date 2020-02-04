@@ -8,9 +8,10 @@ $(document).ready(function() {
     console.log(timeLeft);
     var quizArea = $("#quiz-area");
     // div for countdown visual
-    var countdown = $(".time");
+    var countdown = $("#time");
     var index = 0;
 
+    var userScore = $(".score");
     // countdown
     var timeInterval = setInterval(function() {
         countdown.text("Time: " + timeLeft);
@@ -22,13 +23,21 @@ $(document).ready(function() {
             console.log("Time's up!");
             clearInterval(timeInterval);
             quizArea.empty();
-            // clear the quiz-area div
+            console.log("Here is the time left: " + timeLeft);
+            var score = {
+                name: "",
+                value: timeLeft};
+            localStorage.setItem("score", JSON.stringify(score));
         } 
     }, 1000);
 
     // index = 0;
     displayQ();
 
+    userScore.on("submit", function() {
+        var name = userScore.val();
+
+    });
     function displayQ() {
         console.log(index);
         var question = quiz[index];
@@ -52,8 +61,9 @@ $(document).ready(function() {
             index++;
             if(index < 4) {
                 displayQ(index);
+            } else {
+                location.href="./userScore.html";
             }
-            
         });
     }
 });

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Enter your score!</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Highscores</h1>
+    <div id="time">
+        <!-- Time: ## -->
+    </div>
+    <div id="score-box"></div>
+    <form>
+        <label for="text-box">Enter your name: </label>
+        <input id="text-box" class="score" type="text">
+        <input id="submit-btn"class="score" type="submit"> 
+    </form>
+    <a class="aBtn" id="back-btn" href="./index.html">Go Back</a>
+    <script>
+        $(document).ready(function() {
+            var score = JSON.parse(localStorage.getItem("score"));
+            $("#score-box").text(score.value);
+            $("#submit-btn").on("submit", function() {
+                var user = $("#text-box").value;
+                score.name.value = user;
+                localStorage.setItem("score", JSON.stringify(score));
+            });
+        });
+        
+        
+    </script>
+</body>
+</html>
