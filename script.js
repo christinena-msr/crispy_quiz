@@ -1,58 +1,59 @@
-// pull questions from questions.js stored in local storage
-var quiz = JSON.parse(localStorage.getItem("questions"));
-console.log(quiz[0].title);
-var timeLeft = quiz.length * 15;
-// should be 75
-console.log(timeLeft);
-// div for countdown visual
-var countdown = document.querySelectorAll(".time")[0];
-// countdown
-var timeInterval = setInterval(function() {
-    countdown.textContent = "Time: " + timeLeft;
-    console.log("Time: " + timeLeft);
-    timeLeft--;
-    if (timeLeft === 0) {
-        countdown.textContent = "Time: 0";
-        countdown.textContent = "Time's up!";
-        console.log("Time's up!");
-        clearInterval(timeInterval);
-    } 
-}, 1000);
-// div for questions to populate
-var question = document.querySelectorAll(".quiz")[0];
+$(document).ready(function() {
 
-// function quizQuestion() {
+    // pull questions from questions.js stored in local storage
+    var quiz = JSON.parse(localStorage.getItem("questions"));
+    console.log(quiz[0].title);
+    var timeLeft = quiz.length * 15;
+    // should be 75
+    console.log(timeLeft);
+    var quizArea = $("#quiz-area");
+    // div for countdown visual
+    var countdown = $(".time");
+    var index = 0;
 
-// }
-// grab question object
-var qObject = quiz[0];
-console.log(qObject.title);
-// display question
-question.textContent = qObject.title;
-// push answers to array
-var multipleChoice = qObject.choices;
-console.log(multipleChoice);
-var answer = qObject.answers;
-console.log(answer);
-// for (let i=0; i<multipleChoice.length; i++) {
-//     var ansOption = document.createElement("button");
-//     ansOption.textContent = multipleChoice[i];
-//     ansOption.setAttribute("class", "answer-button")
-//     question.appendChild(ansOption);
-// }
+    // countdown
+    var timeInterval = setInterval(function() {
+        countdown.text("Time: " + timeLeft);
+        // console.log("Time: " + timeLeft);
+        timeLeft--;
+        if (timeLeft === 0 || index == 4) {
+            countdown.text("Time: 0");
+            countdown.text("Time's up!");
+            console.log("Time's up!");
+            clearInterval(timeInterval);
+            quizArea.empty();
+            // clear the quiz-area div
+        } 
+    }, 1000);
 
-var ansBtn = document.querySelectorAll(".answer-button");
-console.log(ansBtn);
-for (let i=0; i<ansBtn.length; i++) {
-    ansBtn[i].textContent = multipleChoice[i];
-    console.log(multipleChoice[i]);
-    ansBtn[i].addEventListener("click", function(event) {
-        event.preventDefault();
-        var feedback = document.getElementById("solution");
-        if (ansBtn[i].textContent == answer) {
-            feedback.textContent = "correct!";
-        } else {
-            feedback.textContent = "wrong";
+    // index = 0;
+    displayQ();
+
+    function displayQ() {
+        console.log(index);
+        var question = quiz[index];
+        console.log(question.title);
+        $(".quiz").text(question.title);
+        console.log("this is question:" + $(".quiz").text());
+        for(let i=0; i<question.choices.length; i++) {
+            $(`#ans${i}`).text(question.choices[i]);
         }
-    })
-}
+        var answer = question.answers;
+        console.log(answer);
+        $("button").on("click", function(event) {
+            event.preventDefault();
+            console.log("this.id: " + $(this).attr("id"));
+            if($(this).attr("id") == answer) {
+                $("#solution").text("Correct!");
+            } else {
+                $("#solution").text("Wrong!");
+                // timeLeft = timeLeft - 5;
+            }
+            index++;
+            if(index < 4) {
+                displayQ(index);
+            }
+            
+        });
+    }
+});

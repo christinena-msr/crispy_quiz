@@ -1,28 +1,28 @@
 var questionArr = [
     { // question 1
-        title: "questionText",
-        choices: ["ans1", "ans2", "ans3", "ans4"],
-        answers: "ans3"
-    },
-    { // question 2
-        title: "question2Text",
-        choices: ["ans1", "ans2", "ans3", "ans4"],
-        answers: "ans4"
-    },
-    {
-        title: "questions3Text",
-        choices: ["ans1", "ans2", "ans3", "ans4"],
-        answers: "ans1"
-    },
-    {
-        title: "questions4Text",
-        choices: ["ans1", "ans2", "ans3", "ans4"],
+        title: "An if/else statement returns a ____ type.",
+        choices: ["integer", "string", "boolean", "char"],
         answers: "ans2"
     },
-    {
-        title: "questions5Text",
-        choices: ["ans1", "ans2", "ans3", "ans4"],
+    { // question 2
+        title: "String concatenation uses ____ operator.",
+        choices: ["multiply", "divide", "minus", "plus"],
         answers: "ans3"
+    },
+    { // question 3
+        title: "What is the vanilla javascript function to GET an API response?",
+        choices: ["fetch()", "get()", "grab()", "ajax()"],
+        answers: "ans0"
+    },
+    { // question 4
+        title: "A for loop is a(n) ____ process",
+        choices: ["recursive", "iterative", "infinite", "dynamic"],
+        answers: "ans1"
+    },
+    { // question 5
+        title: "Bootstrap is for ______ ",
+        choices: ["HTML", "Javascript", "CSS", "APIs"],
+        answers: "ans2"
     },
 ];
 
