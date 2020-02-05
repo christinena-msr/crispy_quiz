@@ -17,7 +17,7 @@ $(document).ready(function() {
         countdown.text("Time: " + timeLeft);
         // console.log("Time: " + timeLeft);
         timeLeft--;
-        if (timeLeft === 0 || index == 4) {
+        if (timeLeft === 0 || index == 5) {
             countdown.text("Time: 0");
             countdown.text("Time's up!");
             console.log("Time's up!");
@@ -52,14 +52,15 @@ $(document).ready(function() {
         $("button").on("click", function(event) {
             event.preventDefault();
             console.log("this.id: " + $(this).attr("id"));
-            if($(this).attr("id") == answer) {
+            if($(this).attr("id") === answer) {
                 $("#solution").text("Correct!");
             } else {
                 $("#solution").text("Wrong!");
                 // timeLeft = timeLeft - 5;
             }
             index++;
-            if(index < 4) {
+            if(index < 5) {
+                answer = "";
                 displayQ(index);
             } else {
                 location.href="./userScore.html";

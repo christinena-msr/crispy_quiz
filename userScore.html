@@ -22,12 +22,16 @@
     <script>
         $(document).ready(function() {
             var score = JSON.parse(localStorage.getItem("score"));
+            console.log(score);
             $("#score-box").text(score.value);
             $("#submit-btn").on("submit", function() {
                 var user = $("#text-box").value;
-                score.name.value = user;
+                score.name = user;
                 localStorage.setItem("score", JSON.stringify(score));
+                console.log(score);
+                location.href = "./score.html";
             });
+            
         });
         
         
