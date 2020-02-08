@@ -5,17 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Scoreboard</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
     <h1>Highscores</h1>
-    <div class="score-board">
-        <!-- <li>1. Leader</li> -->
+    <div id="score-board">
     </div>
     <a class="aBtn" id="back-btn" href="./index.html">Go Back</a>
     <button class="aBtn">Clear Highscores</button>
     <script>
-        var highscore = JSON.parse(localStorage.getItem(score));
-        $(".score-board").text(highscore.name + " " + highscore.value);
+        $(document).ready(function() {
+            let highscore = JSON.parse(localStorage.getItem("score"));
+            console.log(highscore);
+            const name = JSON.parse(localStorage.getItem("user"));
+            console.log(name);
+            let score = $("<div>");
+            score.text(`name: ${name} score: ${highscore}`);
+            console.log(score.text());
+            $("#score-board").append(score);
+            $("button").on("click", function(event) {
+                event.preventDefault();
+                $("#score-board").empty();
+            });
+        });
     </script>
 </body>
 </html>

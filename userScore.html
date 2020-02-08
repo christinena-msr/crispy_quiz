@@ -12,24 +12,23 @@
     <div id="time">
         <!-- Time: ## -->
     </div>
-    <div id="score-box"></div>
-    <form>
-        <label for="text-box">Enter your name: </label>
-        <input id="text-box" class="score" type="text">
-        <input id="submit-btn"class="score" type="submit"> 
+    <form method="POST">
+        <div id="score-box">
+            <label for="name">Name: </label>
+            <input id="name" type="text" placeholder="username">
+            <button id="submit-btn">Submit</button> 
+        </div>
     </form>
     <a class="aBtn" id="back-btn" href="./index.html">Go Back</a>
     <script>
         $(document).ready(function() {
-            var score = JSON.parse(localStorage.getItem("score"));
-            console.log(score);
-            $("#score-box").text(score.value);
-            $("#submit-btn").on("submit", function() {
-                var user = $("#text-box").value;
-                score.name = user;
-                localStorage.setItem("score", JSON.stringify(score));
-                console.log(score);
-                location.href = "./score.html";
+            const score = JSON.parse(localStorage.getItem("score"));
+            $("#time").text(`Score: ${score}`);
+            $("#submit-btn").on("click", function(event) {
+                event.preventDefault();
+                const user = $("#name").val();
+                localStorage.setItem("user", JSON.stringify(user));
+                setTimeout(() => location.href = "./score.html", 500);
             });
             
         });

@@ -1,69 +1,76 @@
 $(document).ready(function() {
 
     // pull questions from questions.js stored in local storage
-    var quiz = JSON.parse(localStorage.getItem("questions"));
-    console.log(quiz[0].title);
-    var timeLeft = quiz.length * 15;
-    // should be 75
-    console.log(timeLeft);
-    var quizArea = $("#quiz-area");
-    // div for countdown visual
-    var countdown = $("#time");
-    var index = 0;
+    const quiz = JSON.parse(localStorage.getItem("questions"));
 
-    var userScore = $(".score");
+    // sets timer value
+    let timeLeft = quiz.length * 15;
+    // grabs id of html for quiz & answers display
+    const quizArea = $("#quiz-area");
+    const ansBox = $("#ans-box");
+    const feedback = $("#solution");
+    // div for countdown visual
+    const countdown = $("#time");
+
+    let index = 0;
+    // user score variable
+    let timeScore = timeLeft;
+
     // countdown
-    var timeInterval = setInterval(function() {
+    let timeInterval = setInterval(function() {
         countdown.text("Time: " + timeLeft);
-        // console.log("Time: " + timeLeft);
+        // timer run down
         timeLeft--;
-        if (timeLeft === 0 || index == 5) {
+        if (timeLeft === 0) {
+            // user is out of time & stops quiz
             countdown.text("Time: 0");
-            countdown.text("Time's up!");
-            console.log("Time's up!");
             clearInterval(timeInterval);
             quizArea.empty();
-            console.log("Here is the time left: " + timeLeft);
-            var score = {
-                name: "",
-                value: timeLeft};
-            localStorage.setItem("score", JSON.stringify(score));
+            setTimeout(countdown.text("Time's up!"), 1000);
+        } else if(index == 5) {
+            // user finishes quiz & score recorded
+            countdown.text(`Time: ${timeScore}`);
+            clearInterval(timeInterval);
+            quizArea.empty();
+            localStorage.setItem("score", timeScore);
+            // user directed to score submit page
+            setTimeout(location.href = "./userScore.html", 1000);
         } 
     }, 1000);
 
-    // index = 0;
-    displayQ();
+    // start the quiz
+    setTimeout(displayQ, 1000);
 
-    userScore.on("submit", function() {
-        var name = userScore.val();
-
-    });
+    // function to iterate through the quiz questions
     function displayQ() {
-        console.log(index);
-        var question = quiz[index];
-        console.log(question.title);
+        // clears div that contains answers for questions
+        ansBox.empty();
+        // grabs question object from quiz object
+        const question = quiz[index];
         $(".quiz").text(question.title);
-        console.log("this is question:" + $(".quiz").text());
         for(let i=0; i<question.choices.length; i++) {
-            $(`#ans${i}`).text(question.choices[i]);
+            let ansBtn = $("<button>");
+            ansBtn.attr("id", `ans${i}`);
+            ansBtn.text(question.choices[i]);
+            ansBox.append(ansBtn);
         }
-        var answer = question.answers;
-        console.log(answer);
+        let answer = question.answers;
         $("button").on("click", function(event) {
             event.preventDefault();
-            console.log("this.id: " + $(this).attr("id"));
+            timeScore = timeLeft;
             if($(this).attr("id") === answer) {
-                $("#solution").text("Correct!");
+                feedback.text("correct!");
             } else {
-                $("#solution").text("Wrong!");
-                // timeLeft = timeLeft - 5;
+                feedback.text("wrong!");
+                timeLeft = timeLeft - 5;
             }
             index++;
             if(index < 5) {
                 answer = "";
                 displayQ(index);
-            } else {
-                location.href="./userScore.html";
+            } 
+            else {
+                return timeScore;
             }
         });
     }
