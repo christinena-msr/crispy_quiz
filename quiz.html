@@ -5,22 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Quiz</title>
-
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-    <a id="score" href="./score.html">View Highscores</a>
-    <div id="time">
-        <!-- Time: ## -->
+    <div class="jumbotron header clear-fix">
+        <button type="button" class="btn btn-light button-color float-left" id="score" onclick="location.href='./score.html'">View Highscores</button>
+        <div class="btn btn-outline-dark float-right" id="time">Time: 0</div>
     </div>
-    <div id="quiz-area">
-        <div class="quiz">
-            <!-- Quiz Question -->
+    <div id="quiz-area" class="container-sm">
+        <div class="row centeredRow">
+            <div class="row quiz centeredRow">
+                <!-- Quiz Question -->
+            </div>
+            <div id="ans-box" class="row btn-group-vertical">
+                <!-- answers -->
+            </div>
+            <div id="solution" class="row centeredRow"></div>
         </div>
-        <div id="ans-box">
-            <!-- answers -->
-        </div>
-        <div id="solution"></div>
     </div>
     <script src="questions.js"></script>
     <script src="script.js"></script>

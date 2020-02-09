@@ -5,13 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Welcome</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-    <a id="score" href="./score.html">View Highscores</a>
-    <div class="time">
-        Time: 0
+    <div class="jumbotron header clear-fix">
+        <button type="button" class="btn btn-light button-color float-left" id="score" onclick="location.href='./score.html'">View Highscores</button>
+        <div class="time btn btn-outline-dark float-right">Time: 0</div>
     </div>
-    <h1>Coding Quiz Challenge</h1>
-    <a id="quiz" href="quiz.html">Start Quiz</a>
+    <div class="container-sm">
+        <div class="row centeredRow">
+            <h1>Coding Quiz Challenge</h1>
+        </div>
+        <div class="row centeredRow">
+            <button type="button" class="btn btn-light button-color" id="quiz" onclick="location.href = 'quiz.html';">Start Quiz</button>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // event.preventDefault();
+            // console.log(JSON.parse(localStorage.getItem("score")));
+            if(JSON.parse(localStorage.getItem("score")) === null) {
+                console.log("True");
+                let scoreList = [];
+                localStorage.setItem("score", JSON.stringify(scoreList));
+            }    
+            console.log(JSON.parse(localStorage.getItem("score")));
+        });
+    </script>
+    
 </body>
 </html>

@@ -5,30 +5,44 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Enter your score!</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
-    <h1>Highscores</h1>
-    <div id="time">
-        <!-- Time: ## -->
-    </div>
-    <form method="POST">
-        <div id="score-box">
-            <label for="name">Name: </label>
-            <input id="name" type="text" placeholder="username">
-            <button id="submit-btn">Submit</button> 
+    <div class="jumbotron header">
+        <h1>Highscores</h1>
+        <h4 id="time">
+            <!-- Time: ## -->
         </div>
-    </form>
-    <a class="aBtn" id="back-btn" href="./index.html">Go Back</a>
+    </div>
+    <div class="container-sm">
+        <div id="score-box">
+            <form method="POST"></form>
+                <label for="name">Name: </label>
+                <input id="name" type="text" placeholder="username">
+                <button id="submit-btn" class="btn btn-dark">Submit</button> 
+            </form>
+            <button class="btn btn-light" id="back-btn" onclick="location.href='./index.html';">Go Back</button>
+        </div>
+    </div>
     <script>
         $(document).ready(function() {
-            const score = JSON.parse(localStorage.getItem("score"));
-            $("#time").text(`Score: ${score}`);
+            // event.preventDefault();
+            const scoreArr = JSON.parse(localStorage.getItem("score"));
+            console.log(scoreArr);
+            currentScore = scoreArr[scoreArr.length - 1];
+            console.log(currentScore);
+            $("#time").text(`Score: ${currentScore.score}`); 
             $("#submit-btn").on("click", function(event) {
                 event.preventDefault();
                 const user = $("#name").val();
-                localStorage.setItem("user", JSON.stringify(user));
-                setTimeout(() => location.href = "./score.html", 500);
+                console.log(user);
+                currentScore.name = user;
+                console.log(currentScore);
+                localStorage.setItem("score", JSON.stringify(scoreArr));
+                console.log(JSON.parse(localStorage.getItem("score")));
+                location.href = "./score.html";
             });
             
         });
