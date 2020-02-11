@@ -25,14 +25,11 @@
 
     <script>
         $(document).ready(function() {
-            // event.preventDefault();
-            // console.log(JSON.parse(localStorage.getItem("score")));
+            // establishes user's scoreboard array
             if(JSON.parse(localStorage.getItem("score")) === null) {
-                console.log("True");
                 let scoreList = [];
                 localStorage.setItem("score", JSON.stringify(scoreList));
             }    
-            console.log(JSON.parse(localStorage.getItem("score")));
         });
     </script>
     

@@ -28,20 +28,14 @@
     </div>
     <script>
         $(document).ready(function() {
-            // event.preventDefault();
             const scoreArr = JSON.parse(localStorage.getItem("score"));
-            console.log(scoreArr);
             currentScore = scoreArr[scoreArr.length - 1];
-            console.log(currentScore);
             $("#time").text(`Score: ${currentScore.score}`); 
             $("#submit-btn").on("click", function(event) {
                 event.preventDefault();
                 const user = $("#name").val();
-                console.log(user);
                 currentScore.name = user;
-                console.log(currentScore);
                 localStorage.setItem("score", JSON.stringify(scoreArr));
-                console.log(JSON.parse(localStorage.getItem("score")));
                 location.href = "./score.html";
             });
             

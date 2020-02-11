@@ -25,20 +25,31 @@
     </div>
     <script>
         $(document).ready(function() {
-            // event.preventDefault();
+            if(JSON.parse(localStorage.getItem("score")) === null) {
+                let scoreList = [];
+                localStorage.setItem("score", JSON.stringify(scoreList));
+            } 
+        
             const highscore = JSON.parse(localStorage.getItem("score"));
-            // code pulled from stack overflow
-            highscore.sort(function(a, b) {
-                return a.score - b.score;
-            });
-            // display leaderboard
-            for(let i=0; i<highscore.length; i++) {
-                let user = $("<div>");
-                user.attr("class", "list-group-item float-left");
-                let standing = highscore.length - (i+1);
-                user.text(`${i+1}. ${highscore[standing].name} - ${highscore[standing].score}`);
-                $("#score-board").append(user);   
+            if (highscore.length === 0) {
+                const emptyMsg = $("<p>");
+                emptyMsg.text("No scores recorded yet!");
+                $("#score-board").append(emptyMsg);
+            } else {
+                // code pulled from stack overflow
+                highscore.sort(function(a, b) {
+                    return a.score - b.score;
+                });
+                // display leaderboard
+                for(let i=0; i<highscore.length; i++) {
+                    let user = $("<div>");
+                    user.attr("class", "list-group-item float-left");
+                    let standing = highscore.length - (i+1);
+                    user.text(`${i+1}. ${highscore[standing].name} - ${highscore[standing].score}`);
+                    $("#score-board").append(user);   
+                }
             }
+            
             // clear highscores
             $("#clear").on("click", function(event) {
                 event.preventDefault();
